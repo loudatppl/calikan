@@ -1,4 +1,0 @@
-/* hides scrollbar but allows scrolling */
-.column::-webkit-scrollbar { /* For chrome */
-    display: none;
-}
