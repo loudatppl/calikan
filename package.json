@@ -9,7 +9,7 @@
   "devDependencies": {
     "concurrently": "^8.0.1",
     "nodemon": "^2.0.22"
-  },
+  }, 
   "scripts": {
     "start": "concurrently \"cd backend && nodemon index.js\" \"cd frontend && npm run dev\""
   }
