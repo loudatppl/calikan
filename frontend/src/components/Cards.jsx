@@ -1,39 +1,42 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import Columns from './Columns';
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Columns from "./Columns";
 
-const Cards = ( { children, boardId, card} ) => {
-    const [cards, setCards] = useState([]);
+const Cards = ({ children, boardId, card }) => {
+  const [cards, setCards] = useState([]);
 
-    useEffect(() => {
-      fetchCards();
-    }, []);
-  
-    const fetchCards = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/api/v1/cards?boardId=${boardId}`);
-        setCards(response.data.cards);
-      } catch ( error ) {
-        console.error('Error fetching cards:', error);
-      }
-    };
-  
-    const filterCardsByStatus = ( status ) => {
-      return cards.filter( ( card ) => card.status === status);
-    };
+  useEffect(() => {
+    fetchCards();
+  }, []);
 
-    const deleteCard = async ( cardId ) => {
-      try {
-        await axios.delete(`http://localhost:8000/api/v1/cards/${cardId}`);
-        setCards( ( prevCards ) => prevCards.filter( ( card ) => card.cardId !== cardId));
-      } catch (error) { 
-        console.log('Error deleting card:', error);
-      }
-    };
+  const fetchCards = async () => {
+    try {
+      const response = await axios.get(
+        `https://calikan.onrender.com/api/v1/cards?boardId=${boardId}`
+      );
+      setCards(response.data.cards);
+    } catch (error) {
+      console.error("Error fetching cards:", error);
+    }
+  };
 
-  
-    return children(filterCardsByStatus, deleteCard);
-}
+  const filterCardsByStatus = (status) => {
+    return cards.filter((card) => card.status === status);
+  };
 
-export default Cards
+  const deleteCard = async (cardId) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/v1/cards/${cardId}`);
+      setCards((prevCards) =>
+        prevCards.filter((card) => card.cardId !== cardId)
+      );
+    } catch (error) {
+      console.log("Error deleting card:", error);
+    }
+  };
+
+  return children(filterCardsByStatus, deleteCard);
+};
+
+export default Cards;

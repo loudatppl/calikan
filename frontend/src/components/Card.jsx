@@ -1,26 +1,26 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Card = () => {
-    const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState([]);
 
-    useEffect(() => {
-      fetchCards();
-    }, []);
-  
-    const fetchCards = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/api/v1/cards');
-        setCards(response.data.cards);
-      } catch (error) {
-        console.error('Error fetching cards:', error);
-      }
-    };
+  useEffect(() => {
+    fetchCards();
+  }, []);
 
-  return (
-    <div>Card</div>
-  )
-}
+  const fetchCards = async () => {
+    try {
+      const response = await axios.get(
+        "https://calikan.onrender.com/api/v1/cards"
+      );
+      setCards(response.data.cards);
+    } catch (error) {
+      console.error("Error fetching cards:", error);
+    }
+  };
 
-export default Card
+  return <div>Card</div>;
+};
+
+export default Card;
