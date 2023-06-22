@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f9f9f9;
+}
+
+@font-face {
+  font-family: "BLOND";
+  src: url("../fonts/blonde.otf");
+}
+
+@font-face {
+  font-family: "ROBOT0";
+  src: url("../fonts/Roboto-Bold.ttf");
+}
+
+@font-face {
+  font-family: "LATO-REGULAR";
+  src: url("../fonts/Lato-Regular.ttf");
+}
+
+/* sidebar */
+
+.sidebar {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-90%);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}

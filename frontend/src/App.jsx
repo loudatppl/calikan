@@ -1,21 +1,27 @@
-import React from 'react'
-import Sidebar from './components/Sidebar'
-import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import User from './pages/User'
-import Workplace from './pages/Workplace'
+import React from "react";
 
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Home from "./components/Home";
+
+import { Routes, Route } from "react-router-dom";
+import Boards from "./components/Boards";
 
 const App = () => {
   return (
-    <div className=''>
-        <Routes>
-            <Route path='/' element={ <Home /> } />
-            <Route path='/user' element={ <User /> }/>
-            <Route path='/workplace' element={ <Workplace /> } />
-        </Routes>
+    <div className="flex">
+      <Sidebar />
+      <div className="flex-grow">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="boards" element={<Boards />} />
+          </Routes>
+        </main>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

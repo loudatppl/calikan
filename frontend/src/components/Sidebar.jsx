@@ -1,48 +1,51 @@
-import React, { useState } from 'react'
-import { HiMenuAlt3, HiUser, HiHome } from 'react-icons/hi'
-import { MdSpaceDashboard } from 'react-icons/md'
-import { AiOutlineDown } from 'react-icons/ai'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from "react";
 
+import { Link } from "react-router-dom";
 
-const Sidebar = (  ) => {
-    const [sidebar, setSidebar] = useState(true);
-    const [submenu, setSubmenu] = useState(true);
+import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
+import { HiViewBoards, HiHome } from "react-icons/hi";
 
-    const menus = [
-        { title: 'user', link:'/user' ,icon: HiUser },
-        { title: 'workplace', link: '/workplace', icon: MdSpaceDashboard },
-        { title: 'home', link: '/', icon: HiHome }
-        
-    ];
+const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(true);
 
-
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <div className='flex gap-6'>
-        <div className={ `bg-[#0e0e0e] min-h-screen ${sidebar ? 'w-72' : 'w-16'} duration-500 text-gray-100 px-4` }>
-            <div className='py-3 flex justify-end mb-8'>
-                <HiMenuAlt3 size={26} className='cursor-pointer' onClick={() => setSidebar( !sidebar )}/>
-            </div>
-            <div className='mt-4 flex flex-col gap-4 relative'>
-                { menus?.map(( menu, index ) => (
-                    <NavLink 
-                        to={ menu?.link }
-                        key={ index }
-                        className={`flex items-center text-sm gap-3.5 font-medium p-2`}
-                    >   
-                        
-                        <div>{ React.createElement( menu?.icon, { size:'20' } ) }</div>
-                        <h2 className={`whitespace-pre duration-500 ${!sidebar && 'opacity-0 overflow-hidden'}`}>{menu?.title}</h2>
-                        
-                    </NavLink>
-                    
-                ))}
-            </div>
-            
-        </div>
+    <div
+      className={` ${
+        isOpen ? "w-60" : "w-[43px]"
+      } relative h-screen bg-navy duration-300 p-2 pt-40`}
+    >
+      <div
+        className="text-dblue absolute cursor-pointer 
+        rounded-[50%] border border-dblue top-20 -right-3 bg-sky"
+        onClick={toggleSidebar}
+      >
+        {isOpen ? <FiChevronLeft size={26} /> : <FiChevronRight size={26} />}
+      </div>
+      <div className="text-sky text-base font-body cursor-pointer relative">
+        <ul className="space-y-6 absolute">
+          <li className="flex space-x-2 items-end">
+            <HiHome size={26} />
+            <Link to="/" className={`${!isOpen && "scale-0"} duration-100`}>
+              Home
+            </Link>
+          </li>
+          <li className="flex space-x-2 items-end">
+            <HiViewBoards size={26} />
+            <Link
+              to="/boards"
+              className={`${!isOpen && "scale-0"} duration-100`}
+            >
+              Boards
+            </Link>
+          </li>
+        </ul>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
